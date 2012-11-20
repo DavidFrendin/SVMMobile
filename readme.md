@@ -4,7 +4,7 @@ This is a web application (made in PHP) designed to act as a mobile friendly fro
 
 The application uses CURL to pull website content, DOM/DOMXPATH to sort out useable content and Memcache for managing redundant calls to the remote webserver.
 
-The general design pattern of the PHP code is MVC-based.
+The general design pattern of the PHP code is MVC, based on the [CodeIgniter framework](http://codeigniter.com/).
 
 The front-end is HTML5 content supported by a [jQuery mobile](http://jquerymobile.com/) framework.
 
@@ -19,7 +19,6 @@ Alpha - Internal development, not mature for public release.
 	* Memcache
 	* DOM
 	* CURL
-* MySQL
 
 This software should be able to work in safe mode.
 
