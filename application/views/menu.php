@@ -52,7 +52,7 @@ if ($recentevents)
 }
 ?>
 	
-		<ul data-role="listview" data-divider-theme="a">
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
 			<li data-role="list-divider"><h2>Navigation</h2></li>
 			<li><a href="<?php echo site_url('news'); ?>">Nyheter</a></li>
 			<li><a href="<?php echo site_url('messages'); ?>">Meddelanden
@@ -78,7 +78,7 @@ if ($cntFriendsOnline)
 }
 ?>
 			</a></li>
-			<li><a href="<?php echo site_url('market'); ?>">Torget</a></li>
+			<li><a href="<?php echo site_url('biz'); ?>">Mina bizzar</a></li>
 			<li><a href="<?php echo site_url('profile'); ?>">Min profil</a></li>
 			<li data-role="list-divider"><h3>Appar</h3></li>
 			<li><a href="<?php echo site_url('lifecounter'); ?>">Livräknare</a></li>
