@@ -1,62 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> 
+<html>
+
 <head>
-<title>404 Page Not Found</title>
-<style type="text/css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>SVM Mobile</title> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head> 
 
-::selection{ background-color: #E13300; color: white; }
-::moz-selection{ background-color: #E13300; color: white; }
-::webkit-selection{ background-color: #E13300; color: white; }
+<body> 
 
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
+<div data-role="page">
 
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
+	<div data-role="header">
+		<a href="<?php echo site_url('menu'); ?>" data-icon="home" class="ui-btn-left">Meny</a>
+		<h1>SVM Mobile</h1>
+	</div><!-- /header -->
 
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
+	<a href="<?php echo site_url('menu'); ?>">
+		<div style=" text-align:center">
+			<img style="width: 100%; display: block;" src="http://svm.hellforge.net/assets/img/header.png" />
+		</div>
+	</a>
+	
+	<div data-role="header" data-theme="e">
+		<h2><?php echo $heading; ?></h2>
+	</div><!-- /header -->
 
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
+	<div data-role="content">	
 
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	-webkit-box-shadow: 0 0 8px #D0D0D0;
-}
+		<div class="content-primary">
 
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
-</head>
-<body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
-	</div>
+			<p><?php echo $message; ?></p>
+			
+		</div>
+			
+	</div><!-- /content -->
+	
+</div><!-- /page -->
+
 </body>
 </html>
