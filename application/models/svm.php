@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 class Svm extends CI_Model {
 
 	private $base_html;
@@ -10,8 +10,6 @@ class Svm extends CI_Model {
         parent::__construct();
 		
 		libxml_use_internal_errors(true); //html is commonly malformed, disable errors
-		
-		session_start();
 		
 		$this->FetchBaseHTML();
     }
@@ -46,6 +44,10 @@ class Svm extends CI_Model {
 		$query = "//div[@id='new_mail']/a";
 		$entries = $xpath->query($query);
 		$el = $entries->item(0);
+		if (!$el)
+		{
+			return 0;
+		}
 		$nodeValue = $el->nodeValue;
 		$nodeValue_array = explode(' ', $nodeValue);
 		return (int)$nodeValue_array[0];
@@ -585,7 +587,7 @@ class Svm extends CI_Model {
 		foreach ($entries as $entry)
 		{
 			$val = $entry->nodeValue;
-			$val_array = explode('	frÃ¥n ', $val);
+			$val_array = explode('	från ', $val);
 			$who[] = $val_array[1];
 
 		}
@@ -711,7 +713,7 @@ class Svm extends CI_Model {
 		foreach ($entries as $entry)
 		{
 			$val = $entry->nodeValue;
-			$val_array = explode('	frÃ¥n ', $val);
+			$val_array = explode('	från ', $val);
 			$who[] = $val_array[1];
 
 		}
