@@ -61,7 +61,7 @@
 		}
 ?>
 
-				<a href="index.html">
+				<a href="<?php echo site_url('profile/view/' . $friend['id']); ?>">
 					<img src="http://www.svenskamagic.com/t/<?php echo $friend['image']; ?>" width="50" height="50" style="padding-left: 20px; padding-top: 20px;" />
 					<h3><?php echo $friend['name']; ?></h3>
 					<p>Senaste forumrubrik: -</p>

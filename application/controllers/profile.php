@@ -25,9 +25,6 @@ class Profile extends CI_Controller {
 			die();
 		}
 
-		/*
-			Fixme: Load profile
-		*/
 		$data = array(
 			'profile' => $this->svm->FetchUserProfile($this->svm->UserId())
 		);
@@ -35,7 +32,7 @@ class Profile extends CI_Controller {
 		$this->load->view('profile', $data);
 	}
 	
-	public function view($id)
+	public function view($userid)
 	{
 		if ($this->svm->Authenticated != true)
 		{
@@ -44,10 +41,10 @@ class Profile extends CI_Controller {
 		}
 
 		$data = array(
-			'news' => $this->svm->NewsById($id)
+			'profile' => $this->svm->FetchUserProfile($userid)
 		);
 
-		$this->load->view('news_view', $data);
+		$this->load->view('profile', $data);
 	}
 }
 

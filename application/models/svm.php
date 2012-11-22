@@ -654,8 +654,25 @@ class Svm extends CI_Model {
 		{
 			$src = $entry->getAttribute("src");
 			$friends[$cnt]['image'] = $src;
+			$friends[$cnt]['id'] = 11;
 			$cnt++;
 		}
+		
+		$xpath = new DOMXPath($doc);
+		$query = "//td[@class='brodtext']//div[contains(@class, 'list_tabell')]/a";
+		$entries = $xpath->query($query);
+
+		$cnt = 0;
+		foreach ($entries as $entry)
+		{
+			$href = $entry->getAttribute("href");
+			if (stristr($href, 'medlemsinfo'))
+			{
+				$friends[$cnt]['id'] = explode('&', explode('=', $href)[1])[0];
+				$cnt++;
+			}
+		}
+		
 		
 		$xpath = new DOMXPath($doc);
 		$query = "//div[@id='vanneronline']//td[@class='mini']//a";
@@ -776,6 +793,7 @@ class Svm extends CI_Model {
 		$el = $entries->item(0);
 		$result['username'] = $el->nodeValue;
 		$result['username'] = trim(str_replace('ONLINE', '', $result['username']));
+		$result['username'] = trim(str_replace('OFFLINE', '', $result['username']));
 
 		$xpath = new DOMXPath($doc);
 		$query = "//p[@class='rubrik']/img";
