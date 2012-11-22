@@ -668,7 +668,9 @@ class Svm extends CI_Model {
 			$href = $entry->getAttribute("href");
 			if (stristr($href, 'medlemsinfo'))
 			{
-				$friends[$cnt]['id'] = explode('&', explode('=', $href)[1])[0];
+				$friendsarray1 = explode('=', $href);
+				$friendsarray2 = explode('&', $friendsarray1[1]);
+				$friends[$cnt]['id'] = $friendsarray2[0];
 				$cnt++;
 			}
 		}
