@@ -32,7 +32,7 @@ class Friends extends CI_Controller {
 		$this->load->view('friends', $data);
 	}
 
-	public function add()
+	public function add($username)
 	{
 		if ($this->svm->Authenticated != true)
 		{
@@ -41,6 +41,7 @@ class Friends extends CI_Controller {
 		}
 		
 		$data['message'] = false;
+		$data['username'] = $username;
 		
 		if ((isset($_POST['username'])) && (isset($_POST['message'])) && (isset($_POST['group'])))
 		{

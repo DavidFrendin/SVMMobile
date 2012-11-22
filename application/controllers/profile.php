@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Messages extends CI_Controller {
+class Profile extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,27 +25,17 @@ class Messages extends CI_Controller {
 			die();
 		}
 
+		/*
+			Fixme: Load profile
+		*/
 		$data = array(
-			'MailFolders' => $this->svm->MailFolders()
-
+			'profile' => $this->svm->FetchUserProfile($this->svm->UserId())
 		);
 
-		$this->load->view('messages', $data);
+		$this->load->view('profile', $data);
 	}
 	
-	public function compose($recipient = '')
-	{
-		if ($this->svm->Authenticated != true)
-		{
-			redirect('/start/', 'refresh');
-			die();
-		}
-
-		$data['recipient'] = $recipient;
-		$this->load->view('messages_compose', $data);
-	}
-	
-	public function Folder($id)
+	public function view($id)
 	{
 		if ($this->svm->Authenticated != true)
 		{
@@ -54,10 +44,10 @@ class Messages extends CI_Controller {
 		}
 
 		$data = array(
-			'mail' => $this->svm->MailByFolder($id)
+			'news' => $this->svm->NewsById($id)
 		);
 
-		$this->load->view('messages_folder', $data);
+		$this->load->view('news_view', $data);
 	}
 }
 

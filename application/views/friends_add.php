@@ -52,7 +52,7 @@ if ($message)
 		<ul data-role="listview">
 			<li data-role="fieldcontain">
 	        	<label for="username">Medlem:</label>
-	        	<input type="text" name="username" id="username" value="" placeholder="Användarnamn"  />
+	        	<input type="text" name="username" id="username" value="<?php echo $username; ?>" placeholder="Användarnamn"  />
 			</li>
 			<li data-role="fieldcontain">
 	        	<label for="message">Meddelande:</label>

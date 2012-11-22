@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 class Svm extends CI_Model {
 
 	private $base_html;
@@ -22,20 +22,15 @@ class Svm extends CI_Model {
 		{
 			return false;
 		}
-		if ($this->session->userdata('userid'))
-		{
-			return (int)$this->session->userdata('userid');
-		}
-		else
-		{
-			$xpath = new DOMXPath($doc);
-			$query = "//a[@id='jagsommedlem']";
-			$entries = $xpath->query($query);
-			$el = $entries->item(0);
-			$href = $el->getAttribute("href");
-			$href_array = explode('=',$href);
-			return (int)$href_array[1];
-		}
+		$doc = new DOMDocument();
+		$doc->loadHTML($this->base_html);
+		$xpath = new DOMXPath($doc);
+		$query = "//a[@id='jagsommedlem']";
+		$entries = $xpath->query($query);
+		$el = $entries->item(0);
+		$href = $el->getAttribute("href");
+		$href_array = explode('=',$href);
+		return (int)$href_array[1];
 	}
 
 	public function NewMessages()
@@ -590,7 +585,7 @@ class Svm extends CI_Model {
 		foreach ($entries as $entry)
 		{
 			$val = $entry->nodeValue;
-			$val_array = explode('	från ', $val);
+			$val_array = explode('	frÃ¥n ', $val);
 			$who[] = $val_array[1];
 
 		}
@@ -716,7 +711,7 @@ class Svm extends CI_Model {
 		foreach ($entries as $entry)
 		{
 			$val = $entry->nodeValue;
-			$val_array = explode('	från ', $val);
+			$val_array = explode('	frÃ¥n ', $val);
 			$who[] = $val_array[1];
 
 		}
@@ -749,6 +744,83 @@ class Svm extends CI_Model {
 			$result[] = array('subject'=>$subject, 'from'=>$who[$cnt], 'time'=>$when[$cnt], 'image'=>$image[$cnt]);
 			$cnt++;
 		}
+		return $result;
+	}
+
+	public function FetchUserProfile($UserId)
+	{
+		if ($this->Authenticated == false)
+		{
+			return false;
+		}
+
+		$html = $this->curl_fetch('http://www.svenskamagic.com/medlem/?ID=' . $UserId);
+		
+		$doc = new DOMDocument();
+		$doc->loadHTML($html);
+		
+		$xpath = new DOMXPath($doc);
+		$query = "//div[@id='user-pres']";
+		$entries = $xpath->query($query);
+		
+		$el = $entries->item(0);
+		$result['body'] = $this->innerXML($el);
+		$result['body'] = str_replace('&#13;', '', $result['body']);
+
+		$xpath = new DOMXPath($doc);
+		$query = "//p[@class='rubrik']";
+		$entries = $xpath->query($query);
+		
+		$el = $entries->item(0);
+		$result['username'] = $el->nodeValue;
+		$result['username'] = trim(str_replace('ONLINE', '', $result['username']));
+
+		$xpath = new DOMXPath($doc);
+		$query = "//p[@class='rubrik']/img";
+		$entries = $xpath->query($query);
+		
+		$el = $entries->item(0);
+		$result['userimg'] = 'http://www.svenskamagic.com/img/' . $el->getAttribute("src");
+
+		$result['userid'] = $UserId;
+
+		$xpath = new DOMXPath($doc);
+		$query = "//td[@class='brodtext']//div[contains(@class, 'list_tabell')]";
+		$entries = $xpath->query($query);
+		
+		$el = $entries->item(0);
+		$result['irl']['name'] = trim($el->nodeValue);
+
+		$el = $entries->item(1);
+		$result['irl']['age'] = trim($el->nodeValue);
+
+		$el = $entries->item(2);
+		$result['irl']['address'] = explode('<br/>', $this->innerXML($el));
+		$result['irl']['address'][0] = trim($result['irl']['address'][0]);
+		$result['irl']['address'][1] = strip_tags(trim($result['irl']['address'][1]));
+		$result['irl']['address'][2] = trim($result['irl']['address'][2]);
+
+		$el = $entries->item(3);
+		$result['irl']['phone'] = trim($el->nodeValue);
+
+		$el = $entries->item(4);
+		$result['contact']['email'] = trim($el->nodeValue);
+
+		$el = $entries->item(5);
+		$result['contact']['msn'] = trim($el->nodeValue);
+
+		$el = $entries->item(6);
+		$result['contact']['skype'] = trim($el->nodeValue);
+
+		$el = $entries->item(7);
+		$result['contact']['icq'] = trim($el->nodeValue);
+
+		$el = $entries->item(8);
+		$result['contact']['modo'] = trim($el->nodeValue);
+
+		$el = $entries->item(9);
+		$result['contact']['website'] = trim($el->nodeValue);
+
 		return $result;
 	}
 

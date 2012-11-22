@@ -37,7 +37,7 @@
 		<ul data-role="listview">
 			<li data-role="fieldcontain">
 	        	<label for="recipent">Till:</label>
-	        	<input type="text" name="recipent" id="recipent" value="" placeholder="Användarnamn"  />
+	        	<input type="text" name="recipent" id="recipent" value="<?php echo $recipient; ?>" placeholder="Användarnamn"  />
 			</li>
 			<li data-role="fieldcontain">
 	        	<label for="subject">Rubrik:</label>
