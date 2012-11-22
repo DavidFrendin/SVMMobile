@@ -365,7 +365,7 @@ $config['proxy_ips'] = '';
 | No description
 |
 */
-$config['cookie_path'] = '/var/www/svmmobile/cookies/';
+$config['curl_cookie_path'] = 'system/cookies/';
 
 
 /* End of file config.php */
