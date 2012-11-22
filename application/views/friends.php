@@ -32,7 +32,7 @@
 			<div data-role="navbar">
 				<ul>
 					<li><a href="<?php echo site_url('friends'); ?>" class="ui-btn-active ui-state-persist">Lista</a></li>
-					<li><a href="<?php echo site_url('friends/new'); ?>">Ny vän</a></li>
+					<li><a href="<?php echo site_url('friends/add'); ?>">Ny vän</a></li>
 				</ul>
 			</div><!-- /navbar -->
 
@@ -40,7 +40,7 @@
 
 		<div class="content-primary">
 		
-		<ul data-role="listview" data-divider-theme="a">
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
 <?php
 	$lastletter = '';
 	foreach ($friends as $friend)

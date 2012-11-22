@@ -160,7 +160,7 @@ class Svm extends CI_Model {
 
 	function CookieFile()
 	{
-		$cookie_path = $this->config->item('cookie_path');
+		$curl_cookie_path = $this->config->item('curl_cookie_path');
 		if (isset($_SESSION['cookie']))
 		{
 			$filename = $_SESSION['cookie'];
@@ -170,8 +170,33 @@ class Svm extends CI_Model {
 			$filename = md5(uniqid());
 			$_SESSION['cookie'] = $filename;
 		}
-		$fullpath = $cookie_path . $filename;
+		$fullpath = $curl_cookie_path . $filename;
 		return $fullpath;
+	}
+	
+	private function CurlPost($url, $data)
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $this->CookieFile());
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->CookieFile());
+		curl_setopt($ch, CURLOPT_USERAGENT, "SVMobile");
+		curl_setopt($ch, CURLOPT_TIMEOUT, 40);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, TRUE);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		ob_start();      // prevent any output
+		$result = curl_exec($ch);
+		if($result === false)
+		{
+			die('Curl error: ' . curl_error($ch));
+		}
+		$result2 = ob_get_clean();
+		curl_close ($ch);
+		unset($ch);
+		
+		return $result;
 	}
 	
 	function Login($username, $password)
@@ -207,6 +232,11 @@ class Svm extends CI_Model {
 		//echo $this->base_html;
 		//die();
 		return $this->Authenticated;
+	}
+	
+	public function AddFriend($username, $message, $groupid)
+	{
+		$result = $this->CurlPost("http://www.svenskamagic.com/profile/vanner.php", "invite_user=$username&message=$message&group=$groupid&action=send_friendinvite");
 	}
 	
 	public function RemoveNotifications()

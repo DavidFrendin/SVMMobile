@@ -40,7 +40,7 @@
 
 		<div class="content-primary">
 
-		<ul data-role="listview" data-theme="c" data-divider-theme="a">
+		<ul data-role="listview" data-inset="true" data-theme="c" data-divider-theme="a">
 			<li data-role="list-divider"><h3>Aktiva bizzar</h3></li>
 			<li>
 				<a>

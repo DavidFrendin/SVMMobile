@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+﻿<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Friends extends CI_Controller {
 
@@ -30,6 +30,29 @@ class Friends extends CI_Controller {
 		);
 
 		$this->load->view('friends', $data);
+	}
+
+	public function add()
+	{
+		if ($this->svm->Authenticated != true)
+		{
+			redirect('/start/', 'refresh');
+			die();
+		}
+		
+		$data['message'] = false;
+		
+		if ((isset($_POST['username'])) && (isset($_POST['message'])) && (isset($_POST['group'])))
+		{
+			$username = $_POST['username'];
+			$message = $_POST['message'];
+			$group = $_POST['group'];
+			$this->svm->AddFriend($username, $message, $group);
+			
+			$data['message'] = "<h2>Skickat</h2>";
+		}
+
+		$this->load->view('friends_add', $data);
 	}
 }
 
