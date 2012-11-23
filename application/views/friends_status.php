@@ -31,9 +31,9 @@
 
 			<div data-role="navbar">
 				<ul>
-					<li><a href="<?php echo site_url('friends'); ?>" data-role="button" data-transition="flip" data-inline="true">Lista</a></li>
-					<li><a href="<?php echo site_url('friends/add'); ?>" data-role="button" data-transition="flip" data-inline="true">Ny vän</a></li>
-					<li><a href="<?php echo site_url('friends/status'); ?>" data-role="button" data-transition="flip" data-inline="true" class="ui-btn-active ui-state-persist">Status</a></li>
+					<li><a href="<?php echo site_url('friends'); ?>">Lista</a></li>
+					<li><a href="<?php echo site_url('friends/add'); ?>">Ny vän</a></li>
+					<li><a href="<?php echo site_url('friends/status'); ?>" class="ui-btn-active ui-state-persist">Status</a></li>
 				</ul>
 			</div><!-- /navbar -->
 
@@ -52,22 +52,22 @@ if ($message)
 
 		<ul data-role="listview" data-inset="true" data-split-icon="delete" data-split-theme="d" data-divider-theme="a">
 			<li data-role="list-divider"><h2>Nya vänförfrågningar</h2></li>
-			<li><a href="index.html">
+			<li><a href="<?php echo site_url('profile/view/userid'); ?>">
 				<h3>DavidF</h3>
 				</a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Neka/avbryt</a>
 			</li>
 			<li data-role="list-divider"><h2>Du väntar svar från</h2></li>
-			<li><a href="index.html">
+			<li><a href="<?php echo site_url('profile/view/userid'); ?>">
 				<h3>Broken Bells</h3>
 				</a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Neka/avbryt</a>
 			</li>
 		</ul>
 		
 		<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
-			<h3>Purchase Album?</h3>
-			<p>Your download will begin immediately on your mobile device when you purchase.</p>
-			<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
-			<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+			<h3>Avbryt vänförfrågan</h3>
+			<p>Vill du avbryta din vänförfrågan med <b>användarnamn</b>?</p>
+			<a href="<?php echo site_url('friends/status/remove/userid'); ?>" data-role="button" data-theme="a" data-icon="delete" data-inline="true" data-mini="true">Ja</a>
+			<a data-role="button" data-rel="back" data-inline="true" data-mini="true">Nej</a>	
 		</div>
 
 		

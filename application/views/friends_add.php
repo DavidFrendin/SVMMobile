@@ -31,9 +31,9 @@
 
 			<div data-role="navbar">
 				<ul>
-					<li><a href="<?php echo site_url('friends'); ?>" data-role="button" data-transition="flip" data-inline="true">Lista</a></li>
-					<li><a href="<?php echo site_url('friends/add'); ?>" data-role="button" data-transition="flip" data-inline="true" class="ui-btn-active ui-state-persist">Ny vän</a></li>
-					<li><a href="<?php echo site_url('friends/status'); ?>" data-role="button" data-transition="flip" data-inline="true">Status</a></li>
+					<li><a href="<?php echo site_url('friends'); ?>" data-transition="fade" data-inline="true">Lista</a></li>
+					<li><a href="<?php echo site_url('friends/add'); ?>" data-transition="fade" data-inline="true" class="ui-btn-active ui-state-persist">Ny vän</a></li>
+					<li><a href="<?php echo site_url('friends/status'); ?>" data-transition="fade" data-inline="true">Status</a></li>
 				</ul>
 			</div><!-- /navbar -->
 
