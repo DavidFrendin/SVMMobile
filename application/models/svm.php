@@ -395,6 +395,8 @@ class Svm extends CI_Model {
 		$entries = $xpath->query($query);
 		$el = $entries->item(0);
 		$result['body'] = $this->innerXML($el);
+		
+		$result['body'] = str_replace('/medlem/?ID=', site_url('profile/view') . '/', $result['body']);
 
 		$xpath = new DOMXPath($doc);
 		$query = "//td[@id='content']//form/table[@width='100%']/tr/td/b";
