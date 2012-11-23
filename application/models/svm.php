@@ -92,6 +92,10 @@ class Svm extends CI_Model {
 		$query = "//div[@id='vanneronline']//b[@class='text_gron']";
 		$entries = $xpath->query($query);
 		$el = $entries->item(0);
+		if (!$el)
+		{
+			return 0;
+		}
 		$nodeValue = $el->nodeValue;
 		$nodeValue_array = explode(' ', $nodeValue);
 		return (int)$nodeValue_array[0];
