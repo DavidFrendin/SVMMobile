@@ -55,6 +55,19 @@ class Friends extends CI_Controller {
 
 		$this->load->view('friends_add', $data);
 	}
+
+	public function status()
+	{
+		if ($this->svm->Authenticated != true)
+		{
+			redirect('/start/', 'refresh');
+			die();
+		}
+		
+		$data['message'] = false;
+
+		$this->load->view('friends_status', $data);
+	}
 }
 
 /* End of file welcome.php */
