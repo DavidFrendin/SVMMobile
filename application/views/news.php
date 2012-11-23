@@ -32,7 +32,7 @@
 	<div data-role="content">	
 
 		<div class="content-primary">
-			<ul data-role="listview">
+			<ul data-role="listview" data-inset="true">
 <?php
 $cnt = 1;
 foreach ($news_list as $entry)

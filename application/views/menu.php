@@ -54,8 +54,8 @@ if ($recentevents)
 	
 		<ul data-role="listview" data-inset="true" data-divider-theme="a">
 			<li data-role="list-divider"><h2>Navigation</h2></li>
-			<li><a href="<?php echo site_url('news'); ?>">Nyheter</a></li>
-			<li><a href="<?php echo site_url('messages'); ?>">Meddelanden
+			<li><a href="<?php echo site_url('news'); ?>" data-transition="flow" data-inline="true">Nyheter</a></li>
+			<li><a href="<?php echo site_url('messages'); ?>" data-transition="flow" data-inline="true">Meddelanden
 <?php
 if ($cntmessages)
 {
@@ -70,7 +70,7 @@ if ($cntmessages)
 }
 ?>
 			</a></li>
-			<li><a href="<?php echo site_url('friends'); ?>">Mina vänner
+			<li><a href="<?php echo site_url('friends'); ?>" data-transition="flow" data-inline="true">Mina vänner
 <?php
 if ($cntFriendsOnline)
 {
@@ -78,10 +78,10 @@ if ($cntFriendsOnline)
 }
 ?>
 			</a></li>
-			<li><a href="<?php echo site_url('biz'); ?>">Mina bizzar</a></li>
-			<li><a href="<?php echo site_url('profile'); ?>">Min profil</a></li>
+			<li><a href="<?php echo site_url('biz'); ?>" data-transition="flow" data-inline="true">Mina bizzar</a></li>
+			<li><a href="<?php echo site_url('profile'); ?>" data-transition="flow" data-inline="true">Min profil</a></li>
 			<li data-role="list-divider"><h3>Appar</h3></li>
-			<li><a href="<?php echo site_url('lifecounter'); ?>">Livräknare</a></li>
+			<li><a href="<?php echo site_url('lifecounter'); ?>" data-transition="flow" data-inline="true">Livräknare</a></li>
 			<li data-theme="b" data-icon="delete"><a href="<?php echo site_url('start/logout'); ?>">Logga ut</a></li>
 		</ul>
 		

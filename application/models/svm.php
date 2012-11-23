@@ -447,51 +447,14 @@ class Svm extends CI_Model {
 			$comments[] = $newarr;
 			$cnt++;
 		}
+		if (!isset($comments))
+		{
+			return false;
+		}
+		
 		$result['comments'] = $comments;
 		
 		return $result;
-		
-		$news_captions = array();
-		$news_id = array();
-		foreach ($entries as $entry)
-		{
-			$news_captions[] = $entry->nodeValue;
-			
-			$href = $entry->getAttribute("href");
-			$href_array = explode('=', $href);
-			$news_id[] = $href_array[1];
-		}
-
-		$xpath = new DOMXPath($doc);
-		$query = "//td[@id='news-list']/div/a[@class='noline']";
-		$entries = $xpath->query($query);
-		$news_authors = array();
-		foreach ($entries as $entry)
-		{
-			$news_authors[] = $entry->nodeValue;
-		}
-
-		$xpath = new DOMXPath($doc);
-		$query = "//td[@id='news-list']/div/p";
-		$entries = $xpath->query($query);
-		$news_bodies = array();
-		foreach ($entries as $entry)
-		{
-			$news_bodies[] = $entry->nodeValue;
-		}
-		
-		$news[] = array('caption'=>$news_captions[0], 'body'=>$news_bodies[0], 'author'=>$news_authors[0], 'id'=>$news_id[0]);
-		$news[] = array('caption'=>$news_captions[1], 'body'=>$news_bodies[1], 'author'=>$news_authors[1], 'id'=>$news_id[1]);
-		$news[] = array('caption'=>$news_captions[2], 'body'=>$news_bodies[2], 'author'=>$news_authors[2], 'id'=>$news_id[2]);
-		$news[] = array('caption'=>$news_captions[3], 'body'=>$news_bodies[3], 'author'=>$news_authors[3], 'id'=>$news_id[3]);
-		$news[] = array('caption'=>$news_captions[4], 'body'=>$news_bodies[4], 'author'=>$news_authors[4], 'id'=>$news_id[4]);
-		$news[] = array('caption'=>$news_captions[5], 'body'=>$news_bodies[5], 'author'=>$news_authors[5], 'id'=>$news_id[5]);
-		$news[] = array('caption'=>$news_captions[6], 'body'=>$news_bodies[6], 'author'=>$news_authors[6], 'id'=>$news_id[6]);
-		$news[] = array('caption'=>$news_captions[7], 'body'=>$news_bodies[7], 'author'=>$news_authors[7], 'id'=>$news_id[7]);
-		$news[] = array('caption'=>$news_captions[8], 'body'=>$news_bodies[8], 'author'=>$news_authors[8], 'id'=>$news_id[8]);
-		$news[] = array('caption'=>$news_captions[9], 'body'=>$news_bodies[9], 'author'=>$news_authors[9], 'id'=>$news_id[9]);
-		
-		return $news;
 	}
 	
 	public function MailFolders()

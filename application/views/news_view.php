@@ -47,8 +47,10 @@
 	<div data-role="content">
 			<ul data-role="listview">
 <?php
-	foreach ($news['comments'] as $comment)
+	if ($news['comments'])
 	{
+		foreach ($news['comments'] as $comment)
+		{
 ?>
 			<li>
 				<img src="http://www.svenskamagic.com/t/<?php echo $comment['image']; ?>" width="50" height="50" style="padding-left: 20px; padding-top: 20px;" />
@@ -57,7 +59,16 @@
 				<p style="white-space: normal;"><b><?php echo $comment['time']; ?></b></p>
 			</li>
 <?php
-}
+		}
+	}
+	else
+	{
+?>
+			<li>
+				<h3>Inga kommentarer än</h3>
+			</li>
+<?php
+	}
 ?>
 			</ul>
 			</div>
