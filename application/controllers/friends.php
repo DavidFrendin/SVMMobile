@@ -52,6 +52,8 @@ class Friends extends CI_Controller {
 			
 			$data['message'] = "<h2>Skickat</h2>";
 		}
+		
+		$data['groups'] = $this->svm->ListFriendGroups();
 
 		$this->load->view('friends_add', $data);
 	}

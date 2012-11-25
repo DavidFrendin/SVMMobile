@@ -737,6 +737,32 @@ class Svm extends CI_Model {
 		return $result;
 	}
 
+	public function ListFriendGroups()
+	{
+		if ($this->Authenticated == false)
+		{
+			return false;
+		}
+
+		$html = $this->curl_fetch('http://www.svenskamagic.com/profile/vanner.php');
+		
+		$doc = new DOMDocument();
+		$doc->loadHTML($html);
+		
+		$xpath = new DOMXPath($doc);
+		$query = "//select[@name='group']/option";
+		$entries = $xpath->query($query);
+		
+		foreach ($entries as $entry)
+		{
+			$group['name'] = $entry->nodeValue;
+			$group['id'] = $entry->getAttribute("value");
+			$groups[] = $group;
+		}
+
+		return $groups;
+	}
+
 	public function FetchUserProfile($UserId)
 	{
 		if ($this->Authenticated == false)

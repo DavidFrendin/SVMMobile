@@ -62,10 +62,12 @@ if ($message)
 			<li data-role="fieldcontain">
 				<label for="group" class="select">Grupp:</label>
 				<select name="group" id="group">
-				   <option value="0">Mina vänner</option>
-				   <option value="0">Grupp 2</option>
-				   <option value="0">Grupp 3</option>
-				   <option value="0">Grupp 4</option>
+<?php
+	foreach ($groups as $group)
+	{
+		echo '<option value="' . $group['id'] . '">' . $group['name'] . '</option>';
+	}
+?>
 				</select>
 			</li>
 			<li class="ui-body ui-body-b">
