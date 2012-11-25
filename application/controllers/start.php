@@ -23,9 +23,18 @@ class Start extends CI_Controller
 		{
 			$this->load->library('AntiMcrypt');
 
-			$_POST['password'] = $this->antimcrypt->decrypt($_COOKIE['svmobile1']);
-			$_POST['username'] = $this->antimcrypt->decrypt($_COOKIE['svmobile2']);
-			$_POST['rememberme'] = 'on';
+			$password = $this->antimcrypt->decrypt($_COOKIE['svmobile1']);
+			$username = $this->antimcrypt->decrypt($_COOKIE['svmobile2']);
+			
+			if ($this->svm->Login($username, $password))
+			{
+				$this->load->library('AntiMcrypt');
+				setcookie("svmobile1", $this->antimcrypt->encrypt($password), time() + 630720000);
+				setcookie("svmobile2", $this->antimcrypt->encrypt($username), time() + 630720000);
+				redirect('/menu/', 'refresh');
+				//header('Location: menu');
+				die();
+			}
 		}
 
 		if ($this->svm->Authenticated === true)
