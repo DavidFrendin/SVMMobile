@@ -762,6 +762,51 @@ class Svm extends CI_Model {
 
 		return $groups;
 	}
+	
+	public function ListFriendRequests()
+	{
+		if ($this->Authenticated == false)
+		{
+			return false;
+		}
+
+		$html = $this->curl_fetch('http://www.svenskamagic.com/profile/vanner.php');
+		
+		$doc = new DOMDocument();
+		$doc->loadHTML($html);
+		
+		$xpath = new DOMXPath($doc);
+		$query = "//td[(@class='brodtext') and (@width='300')]//p//a";
+		$entries = $xpath->query($query);
+		
+		for ($index = 0; $index < $entries->length; $index++)
+		{
+			$href = $entries->item($index)->getAttribute("href");
+			
+			if (stristr($href, 'medlemsinfo'))
+			{
+				$id = explode('../medlemsinfo.php?ID=', $href)[1];
+				$name = $entries->item($index)->nodeValue;
+				$index++;
+				$removalid = explode('vanner.php?avbryt=', $entries->item($index)->getAttribute("href"))[1];
+				$friends[$id]['id'] = $id;
+				$friends[$id]['name'] = $name;
+				$friends[$id]['removalid'] = $removalid;
+			}
+		}
+
+		return $friends;
+	}
+	
+	public function CancelFriendRequest($CancelId)
+	{
+		if ($this->Authenticated == false)
+		{
+			return false;
+		}
+
+		$html = $this->curl_fetch('http://www.svenskamagic.com/profile/vanner.php?avbryt=' . $CancelId);
+	}
 
 	public function FetchUserProfile($UserId)
 	{

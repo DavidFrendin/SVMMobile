@@ -51,24 +51,33 @@ if ($message)
 		
 
 		<ul data-role="listview" data-inset="true" data-split-icon="delete" data-split-theme="d" data-divider-theme="a">
-			<li data-role="list-divider"><h2>Nya vänförfrågningar</h2></li>
-			<li><a href="<?php echo site_url('profile/view/userid'); ?>">
-				<h3>DavidF</h3>
-				</a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Neka/avbryt</a>
-			</li>
 			<li data-role="list-divider"><h2>Du väntar svar från</h2></li>
-			<li><a href="<?php echo site_url('profile/view/userid'); ?>">
-				<h3>Broken Bells</h3>
-				</a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Neka/avbryt</a>
+<?php
+foreach ($activerequests as $request)
+{
+?>
+			<li><a href="<?php echo site_url('profile/view/' . $request['id']); ?>">
+				<h3><?php echo $request['name']; ?></h3>
+				</a><a href="#remove<?php echo $request['removalid']; ?>" data-rel="popup" data-position-to="window" data-transition="pop">Neka/avbryt</a>
 			</li>
+<?php
+}
+?>
 		</ul>
 		
-		<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+<?php
+foreach ($activerequests as $request)
+{
+?>
+		<div data-role="popup" id="remove<?php echo $request['removalid']; ?>" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
 			<h3>Avbryt vänförfrågan</h3>
-			<p>Vill du avbryta din vänförfrågan med <b>användarnamn</b>?</p>
-			<a href="<?php echo site_url('friends/status/remove/userid'); ?>" data-role="button" data-theme="a" data-icon="delete" data-inline="true" data-mini="true">Ja</a>
+			<p>Vill du avbryta din vänförfrågan med <b><?php echo $request['name']; ?></b>?</p>
+			<a href="<?php echo site_url('friends/status/remove/' . $request['removalid']); ?>" data-role="button" data-theme="a" data-icon="delete" data-inline="true" data-mini="true">Ja</a>
 			<a data-role="button" data-rel="back" data-inline="true" data-mini="true">Nej</a>	
 		</div>
+<?php
+}
+?>
 
 		
 		</div>

@@ -58,7 +58,7 @@ class Friends extends CI_Controller {
 		$this->load->view('friends_add', $data);
 	}
 
-	public function status()
+	public function status($action = false, $removalid = false)
 	{
 		if ($this->svm->Authenticated != true)
 		{
@@ -66,7 +66,13 @@ class Friends extends CI_Controller {
 			die();
 		}
 		
+		if ($action == 'remove')
+		{
+			$this->svm->CancelFriendRequest($removalid);
+		}
+
 		$data['message'] = false;
+		$data['activerequests'] = $this->svm->ListFriendRequests();
 
 		$this->load->view('friends_status', $data);
 	}
