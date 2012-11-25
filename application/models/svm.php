@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 class Svm extends CI_Model {
 
 	private $base_html;
@@ -540,13 +540,23 @@ class Svm extends CI_Model {
 		}
 
 		$xpath = new DOMXPath($doc);
+		$query = "//a[contains(@href, 'newmail=reply#nyttbrev')]";
+		$entries = $xpath->query($query);
+		$el = $entries->item(0);
+		$href = $el->getAttribute("href");
+		$id = explode('&', explode('mail=', $href)[1])[0];
+		$messageids[] = $id;
+
+		$xpath = new DOMXPath($doc);
 		$query = "//td[@class='brodtext']//div[contains(@class, 'list_tabell')]//span[@class='formtext']/a";
 		$entries = $xpath->query($query);
 		
 		foreach ($entries as $entry)
 		{
 			$subjects[] = $entry->nodeValue;
-
+			$href = $entry->getAttribute("href");
+			$id = explode('&', explode('=', $href)[1])[0];
+			$messageids[] = $id;
 		}
 
 		$xpath = new DOMXPath($doc);
@@ -556,11 +566,10 @@ class Svm extends CI_Model {
 		foreach ($entries as $entry)
 		{
 			$val = $entry->nodeValue;
-			$val_array = explode('	från ', $val);
+			$val_array = explode('frÃ¥n', $val);
 			$who[] = $val_array[1];
-
 		}
-
+		
 		$xpath = new DOMXPath($doc);
 		$query = "//td[@class='brodtext']//div[contains(@class, 'list_tabell')]//i";
 		$entries = $xpath->query($query);
@@ -586,7 +595,7 @@ class Svm extends CI_Model {
 		$result = array();
 		foreach ($subjects as $subject)
 		{
-			$result[] = array('subject'=>$subject, 'from'=>$who[$cnt], 'time'=>$when[$cnt], 'image'=>$image[$cnt]);
+			$result[] = array('subject'=>$subject, 'from'=>$who[$cnt], 'time'=>$when[$cnt], 'image'=>$image[$cnt], 'id'=>$messageids[$cnt]);
 			$cnt++;
 		}
 		return $result;
@@ -715,7 +724,7 @@ class Svm extends CI_Model {
 		foreach ($entries as $entry)
 		{
 			$val = $entry->nodeValue;
-			$val_array = explode('	från ', $val);
+			$val_array = explode('	frÃ¥n ', $val);
 			$who[] = $val_array[1];
 
 		}

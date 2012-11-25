@@ -31,13 +31,6 @@
 
 	<div data-role="content">	
 
-		<div class="content-primary">
-		
-			<h3>temp</h3>
-			<p>temp</p>
-			
-		</div>
-
 			<ul data-role="listview" data-inset="true" data-icon="star">
 			<li data-role="list-divider">Mapnamn</li>
 <?php
@@ -45,7 +38,7 @@
 	{
 ?>
 			<li>
-				<a href="index.html">
+				<a href="<?php echo site_url('messages/view/' . $row['id']); ?>">
 				<img src="http://www.svenskamagic.com/t/<?php echo $row['image']; ?>" style="padding-left: 30px; padding-top: 30px;" />
 				<h3><?php echo $row['subject']; ?></h3>
 				<p style="white-space: normal;">Från: <?php echo $row['from']; ?></p>
