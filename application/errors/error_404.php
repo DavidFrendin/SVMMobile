@@ -26,8 +26,12 @@
 	</a>
 	
 	<div data-role="header" data-theme="e">
-		<h2><?php echo $heading; ?></h2>
+		<h2>Fel 404</h2>
 	</div><!-- /header -->
+
+	<div style=" text-align:center">
+		<img style="width: 100%; display: block;" src="http://svm.hellforge.net/assets/img/error_ani.gif" />
+	</div>
 
 	<div data-role="content">	
 
