@@ -40,6 +40,16 @@ class Messages extends CI_Controller {
 			redirect('/start/', 'refresh');
 			die();
 		}
+		
+		if ((isset($_POST['recipient'])) && (isset($_POST['subject'])) && (isset($_POST['text'])) && (isset($_POST['save'])))
+		{
+			$recipient = $_POST['recipient'];
+			$subject = $_POST['subject'];
+			$text = $_POST['text'];
+			$save = ($_POST['save'] == 'on');
+			
+			$this->svm->SendInternMessage($recipient, $subject, $text, $save);
+		}
 
 		$data['recipient'] = $recipient;
 		$this->load->view('messages_compose', $data);

@@ -592,6 +592,20 @@ class Svm extends CI_Model {
 		return $result;
 	}
 	
+	public function SendInternMessage($recipient, $subject, $message, $save)
+	{
+		$save = true;
+		if ($save)
+		{
+			$postdata = "mottagare[1]=$recipient&sel=&rubrik[1]=$subject&meddelande[1]=$message&spara[1]=false&spara_location[1]=&newmail=&mail=&p=1&action=send_mail";
+		}
+		else
+		{
+			$postdata = "mottagare[1]=$recipient&sel=&rubrik[1]=$subject&meddelande[1]=$message&spara_location[1]=out&newmail=&mail=&p=1&action=send_mail";
+		}
+		$result = $this->CurlPost("http://www.svenskamagic.com/mail/index.php", $postdata);
+	}
+	
 	public function ListFriends()
 	{
 		if ($this->Authenticated == false)
