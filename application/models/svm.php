@@ -502,7 +502,7 @@ class Svm extends CI_Model {
 			$href = $entry->getAttribute("href");
 			if (strpos($href,'index.php?mail') === false)
 			{
-				$array = split('=', $href);
+				$array = explode('=', $href);
 				$links[] = $array[1];
 			}
 		}
@@ -613,6 +613,43 @@ class Svm extends CI_Model {
 			$postdata = "mottagare[1]=$recipient&sel=&rubrik[1]=$subject&meddelande[1]=$message&spara_location[1]=out&newmail=&mail=&p=1&action=send_mail";
 		}
 		$result = $this->CurlPost("http://www.svenskamagic.com/mail/index.php", $postdata);
+	}
+	
+	public function GetUniqueMail($MessageId)
+	{
+		if ($this->Authenticated == false)
+		{
+			return false;
+		}
+
+		$html = $this->curl_fetch('http://www.svenskamagic.com/mail/index.php?mail=' . $MessageId . '&p=1');
+		
+		$doc = new DOMDocument();
+		$doc->loadHTML($html);
+		
+		$xpath = new DOMXPath($doc);
+		$query = "//table//tr//td//table//tr//td//table//tr//td//table//tr//td//p";
+		$entries = $xpath->query($query);
+		$el = $entries->item(0);
+		$message['subject'] = $el->nodeValue;
+
+		$xpath = new DOMXPath($doc);
+		$query = "//table//tr/td/table//tr/td//table//tr/td/table//tr/td/span//b/a";
+		$entries = $xpath->query($query);
+		$el = $entries->item(0);
+		$message['from']['name'] = $el->nodeValue;
+		
+		$href = $el->getAttribute("href");
+		$id = explode('&', explode('=', $href)[1])[0];
+		$message['from']['id'] = $id;
+
+		$xpath = new DOMXPath($doc);
+		$query = "//*[@id='content']/table[2]/tr/td/table/tr/td[3]/table/tr/td/table[3]/tr/td";
+		$entries = $xpath->query($query);
+		$el = $entries->item(0);
+		$message['body'] = $this->innerXML($el);
+
+		return $message;
 	}
 	
 	public function ListFriends()

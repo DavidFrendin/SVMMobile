@@ -41,13 +41,13 @@
 <?php
 foreach ($MailFolders as $row)
 {
-	echo '<li><a href="messages/folder/' . $row['id'] . '"><h3>' . $row['name'] . '</h3><p>' . $row['messages'] . '</p></a><a href="#folder_options" data-rel="popup" data-position-to="window" data-transition="pop">Alternativ</a></li>';
+	echo '<li><a href="messages/folder/' . $row['id'] . '"><h3>' . $row['name'] . '</h3><p>' . $row['messages'] . '</p></a><!--<a href="#folder_options" data-rel="popup" data-position-to="window" data-transition="pop">Alternativ</a>--></li>';
 }
 ?>
 				
 		</ul>
 
-		<div data-role="popup" id="folder_options" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+<!--		<div data-role="popup" id="folder_options" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
 			<h3>Alternativ för mapp</h3>
 <fieldset data-role="controlgroup">
 	<legend>Töm mappen och ...</legend>
@@ -66,6 +66,7 @@ foreach ($MailFolders as $row)
 			<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Ok</a>
 			<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Avbryt</a>	
 		</div>
+		-->
 		
 		</div>
 			

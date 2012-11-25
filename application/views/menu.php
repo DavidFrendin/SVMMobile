@@ -78,7 +78,8 @@ if ($cntFriendsOnline)
 }
 ?>
 			</a></li>
-			<li><a href="<?php echo site_url('biz'); ?>" data-transition="flow" data-inline="true">Mina bizzar</a></li>
+			<!-- Biz features relocated to RC -->
+			<!--<li><a href="<?php echo site_url('biz'); ?>" data-transition="flow" data-inline="true">Mina bizzar</a></li>-->
 			<li><a href="<?php echo site_url('profile'); ?>" data-transition="flow" data-inline="true">Min profil</a></li>
 			<li data-role="list-divider"><h3>Appar</h3></li>
 			<li><a href="<?php echo site_url('lifecounter'); ?>" data-transition="flow" data-inline="true">Livräknare</a></li>

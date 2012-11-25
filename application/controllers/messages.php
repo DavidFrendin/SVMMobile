@@ -69,6 +69,21 @@ class Messages extends CI_Controller {
 
 		$this->load->view('messages_folder', $data);
 	}
+
+	public function View($MessageId)
+	{
+		if ($this->svm->Authenticated != true)
+		{
+			redirect('/start/', 'refresh');
+			die();
+		}
+
+		$data = array(
+			'mail' => $this->svm->GetUniqueMail($MessageId)
+		);
+
+		$this->load->view('messages_view', $data);
+	}
 }
 
 /* End of file welcome.php */
