@@ -15,7 +15,7 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<a href="<?php echo site_url('menu'); ?>" data-icon="home" class="ui-btn-left">Meny</a>
+		<a href="<?php echo site_url('menu'); ?>" data-icon="back" data-iconpos="notext" data-rel="back" class="ui-btn-left"></a>
 		<h1>SVM Mobile</h1>
 	</div><!-- /header -->
 

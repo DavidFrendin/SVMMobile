@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html> 
+<!DOCTYPE html> 
 <html>
 
 <head>
@@ -87,6 +87,9 @@ if ($cntFriendsOnline)
 		</ul>
 		
 
+		<div style=" text-align:center">
+			<p style="font-size: 10px;">v0.2b, av <a href="mailto:david.frendin@gmail.com">David Frendin</a></p>
+		</div>
 		
 	</div><!-- /content -->
 	

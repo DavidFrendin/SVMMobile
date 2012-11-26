@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html> 
+<!DOCTYPE html> 
 <html>
 
 <head>
@@ -15,7 +15,7 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<a href="<?php echo site_url('news'); ?>" data-icon="back" class="ui-btn-left">Tillbaka</a>
+		<a href="<?php echo site_url('news'); ?>" data-icon="back" data-iconpos="notext" data-rel="back" class="ui-btn-left"></a>
 		<h1>SVM Mobile</h1>
 	</div><!-- /header -->
 
