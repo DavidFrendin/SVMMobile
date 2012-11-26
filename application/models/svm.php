@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class Svm extends CI_Model {
 
 	private $base_html;
@@ -544,7 +544,9 @@ class Svm extends CI_Model {
 		$entries = $xpath->query($query);
 		$el = $entries->item(0);
 		$href = $el->getAttribute("href");
-		$id = explode('&', explode('mail=', $href)[1])[0];
+		$arr1 = explode('mail=', $href);
+		$arr2 = explode('&', $arr1[1]);
+		$id = $arr2[0];
 		$messageids[] = $id;
 
 		$xpath = new DOMXPath($doc);
@@ -555,7 +557,9 @@ class Svm extends CI_Model {
 		{
 			$subjects[] = $entry->nodeValue;
 			$href = $entry->getAttribute("href");
-			$id = explode('&', explode('=', $href)[1])[0];
+			$arr1 = explode('=', $href);
+			$arr2 = explode('&', $arr1[1]);
+			$id = $arr2[0];
 			$messageids[] = $id;
 		}
 
@@ -640,7 +644,9 @@ class Svm extends CI_Model {
 		$message['from']['name'] = $el->nodeValue;
 		
 		$href = $el->getAttribute("href");
-		$id = explode('&', explode('=', $href)[1])[0];
+		$arr1 = explode('=', $href);
+		$arr2 = explode('&', $arr1[1]);
+		$id = $arr2[0];
 		$message['from']['id'] = $id;
 
 		$xpath = new DOMXPath($doc);
@@ -845,10 +851,12 @@ class Svm extends CI_Model {
 			
 			if (stristr($href, 'medlemsinfo'))
 			{
-				$id = explode('../medlemsinfo.php?ID=', $href)[1];
+				$arr1 = explode('../medlemsinfo.php?ID=', $href);
+				$id = $arr1[1];
 				$name = $entries->item($index)->nodeValue;
 				$index++;
-				$removalid = explode('vanner.php?avbryt=', $entries->item($index)->getAttribute("href"))[1];
+				$arr2 = explode('vanner.php?avbryt=', $entries->item($index)->getAttribute("href"));
+				$removalid = $arr2[1];
 				$friends[$id]['id'] = $id;
 				$friends[$id]['name'] = $name;
 				$friends[$id]['removalid'] = $removalid;
