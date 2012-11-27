@@ -2,21 +2,6 @@
 
 class Start extends CI_Controller
 {
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()
 	{
 		if ((isset($_COOKIE['svmobile1'])) && (isset($_COOKIE['svmobile2'])))
@@ -32,7 +17,6 @@ class Start extends CI_Controller
 				setcookie("svmobile1", $this->antimcrypt->encrypt($password), time() + 630720000);
 				setcookie("svmobile2", $this->antimcrypt->encrypt($username), time() + 630720000);
 				redirect('/menu/', 'refresh');
-				//header('Location: menu');
 				die();
 			}
 		}
@@ -40,13 +24,7 @@ class Start extends CI_Controller
 		if ($this->svm->Authenticated === true)
 		{
 			redirect('/menu/', 'refresh');
-			//header('Location: menu');
 			die();
-		}
-		else
-		{
-			//print_r($svm);
-			//die();
 		}
 		
 		$data = array(
@@ -83,7 +61,6 @@ class Start extends CI_Controller
 				setcookie ("svmobile_pw", "", time() - 3600);
 			}
 			redirect('/menu/', 'refresh');
-			//header('Location: menu');
 			die();
 		}
 		else
@@ -106,6 +83,3 @@ class Start extends CI_Controller
 
 	}
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
