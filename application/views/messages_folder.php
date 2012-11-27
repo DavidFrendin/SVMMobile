@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src="http://svm.hellforge.net/assets/js/jqm.autoComplete-1.5.0-min.js"></script>
 </head> 
 
 <body> 
@@ -39,7 +40,7 @@
 ?>
 			<li>
 				<a href="<?php echo site_url('messages/view/' . $row['id']); ?>">
-				<img src="http://www.svenskamagic.com/t/<?php echo $row['image']; ?>" style="padding-left: 30px; padding-top: 30px;" />
+				<img src="<?php echo $row['image']; ?>" style="padding-left: 30px; padding-top: 30px;" />
 				<h3><?php echo $row['subject']; ?></h3>
 				<p style="white-space: normal;">Från: <?php echo $row['from']; ?></p>
 				<p style="white-space: normal;"><i><?php echo $row['time']; ?></i></p>

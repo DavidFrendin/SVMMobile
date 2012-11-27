@@ -8,11 +8,12 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src="http://svm.hellforge.net/assets/js/jqm.autoComplete-1.5.0-min.js"></script>
 </head> 
 
 <body> 
 
-<div data-role="page">
+<div data-role="page" id="friendsAddPage">
 
 	<div data-role="header">
 		<a href="<?php echo site_url('menu'); ?>" data-icon="back" data-iconpos="notext" data-rel="back" class="ui-btn-left"></a>
@@ -50,40 +51,52 @@ if ($message)
 		<div class="content-primary">
 		
 	<form method="post" data-ajax="false">
-		<ul data-role="listview">
-			<li data-role="fieldcontain">
-	        	<label for="username">Medlem:</label>
-	        	<input type="text" name="username" id="username" value="<?php echo $username; ?>" placeholder="Användarnamn"  />
-			</li>
-			<li data-role="fieldcontain">
-	        	<label for="message">Meddelande:</label>
-				<textarea cols="40" rows="8" name="message" id="message"></textarea>
-			</li>
-			<li data-role="fieldcontain">
-				<label for="group" class="select">Grupp:</label>
-				<select name="group" id="group">
+		<div data-role="fieldcontain">
+			<label for="username">Medlem:</label>
+			<input type="text" name="username" id="username" value="<?php echo $username; ?>" placeholder="Användarnamn"  />
+			<ul id="suggestions" data-role="listview" data-inset="true"></ul>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="message">Meddelande:</label>
+			<textarea cols="40" rows="8" name="message" id="message"></textarea>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="group" class="select">Grupp:</label>
+			<select name="group" id="group">
 <?php
 	foreach ($groups as $group)
 	{
 		echo '<option value="' . $group['id'] . '">' . $group['name'] . '</option>';
 	}
 ?>
-				</select>
-			</li>
-			<li class="ui-body ui-body-b">
-				<fieldset class="ui-grid-a">
-						<div class="ui-block-a"><button type="submit" data-theme="b">Skicka</button></div>
-						<div class="ui-block-b"><button type="button" data-theme="d" onclick="window.location ='<?php echo site_url('friends'); ?>';">Avbryt</button></div>
-			    </fieldset>
-			</li>
+			</select>
+		</div>
+		<div data-role="fieldcontain">
+			<fieldset class="ui-grid-a">
+					<div class="ui-block-a"><button type="submit" data-theme="b">Skicka</button></div>
+					<div class="ui-block-b"><button type="button" data-theme="d" onclick="window.location ='<?php echo site_url('friends'); ?>';">Avbryt</button></div>
+			</fieldset>
+		</div>
 			
-		</ul>
 		
 		</form>
 		
 		</div>
 			
 	</div><!-- /content -->
+	
+	<script type="text/javascript">
+
+		$( document ).delegate("#friendsAddPage", "pagebeforecreate", function() {
+			$("#username").autocomplete({
+				target: $('#suggestions'),
+				source: '<?php echo site_url('api/searchusername'); ?>/',
+				link: '<?php echo site_url('friends/add'); ?>/',
+				minLength: 1
+			});
+
+		});
+	</script>
 	
 </div><!-- /page -->
 

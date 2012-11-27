@@ -591,7 +591,18 @@ class Svm extends CI_Model {
 		foreach ($entries as $entry)
 		{
 			$src = $entry->getAttribute("src");
-			$image[] = $src;
+			if (stristr($src, 'mail_0000.gif'))
+			{
+				$image[] = 'http://svm.hellforge.net/assets/img/icons/email_open.png';
+			}
+			elseif (stristr($src, 'mail_0100.gif'))
+			{
+				$image[] = 'http://svm.hellforge.net/assets/img/icons/email_send_receive.png';
+			}
+			else
+			{
+				$image[] = 'http://www.svenskamagic.com/t/' . $src;
+			}
 
 		}
 		
