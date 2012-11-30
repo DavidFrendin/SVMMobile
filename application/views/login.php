@@ -9,6 +9,18 @@
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src="http://svm.hellforge.net/assets/js/jqm.autoComplete-1.5.0-min.js"></script>
+	<script src="http://svm.hellforge.net/assets/js/jquery.jcryption.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var Options = {
+				getKeysURL: "<?php echo site_url('api/keypair'); ?>",
+				handshakeURL: "<?php echo site_url('api/handshake'); ?>",
+				beforeEncryption: function(){$( "#popupLogin" ).popup( "open" ); return true;}
+			};
+
+			$("#encryptedForm").jCryption(Options);
+		});
+	</script>
 </head> 
 
 <body> 
@@ -37,7 +49,7 @@ if ($login_failed)
 ?>
 
 	<div data-role="content">
-		<form method="post" action="<?php echo site_url('start/dologin'); ?>" data-ajax="false">
+		<form method="post" action="<?php echo site_url('start/dologin'); ?>" data-ajax="false" id="encryptedForm">
 			<ul data-role="listview">
 				<li data-role="fieldcontain">
 					<label for="username">Användarnamn:</label>
@@ -59,6 +71,11 @@ if ($login_failed)
 		
 		
 	</div><!-- /content -->
+	
+	<div data-role="popup" id="popupLogin">
+		<h2>Krypterad inloggning</h2>
+		<p>Det kan ta en liten stund...<p>
+	</div>
 	
 </div><!-- /page -->
 

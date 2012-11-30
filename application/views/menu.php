@@ -54,8 +54,12 @@ if ($recentevents)
 ?>
 	
 		<ul data-role="listview" data-inset="true" data-divider-theme="a">
-			<li data-role="list-divider"><h2>Navigation</h2></li>
+			<li data-role="list-divider"><h2>Svenskamagic</h2></li>
 			<li><a href="<?php echo site_url('news'); ?>" data-transition="flow" data-inline="true">Nyheter</a></li>
+			<li><a href="<?php echo site_url('cards'); ?>" data-transition="flow" data-inline="true">Kortpärmen</a></li>
+			<!--<li><a href="<?php echo site_url('center'); ?>" data-transition="flow" data-inline="true">Center</a></li>-->
+			<!--<li><a href="<?php echo site_url('tournaments'); ?>" data-transition="flow" data-inline="true">Turneringar</a></li>-->
+			<li data-role="list-divider"><h2>Profil</h2></li>
 			<li><a href="<?php echo site_url('messages'); ?>" data-transition="flow" data-inline="true">Meddelanden
 <?php
 if ($cntmessages)
@@ -71,7 +75,7 @@ if ($cntmessages)
 }
 ?>
 			</a></li>
-			<li><a href="<?php echo site_url('friends'); ?>" data-transition="flow" data-inline="true">Mina vänner
+			<li><a href="<?php echo site_url('friends'); ?>" data-transition="flow" data-inline="true">Vänner
 <?php
 if ($cntFriendsOnline)
 {
@@ -84,6 +88,7 @@ if ($cntFriendsOnline)
 			<li><a href="<?php echo site_url('profile'); ?>" data-transition="flow" data-inline="true">Min profil</a></li>
 			<li data-role="list-divider"><h3>Appar</h3></li>
 			<li><a href="<?php echo site_url('lifecounter'); ?>" data-transition="flow" data-inline="true">Livräknare</a></li>
+			<!--<li><a href="<?php echo site_url('quiz'); ?>" data-transition="flow" data-inline="true">Quiz</a></li>-->
 			<li data-theme="b" data-icon="delete"><a href="<?php echo site_url('start/logout'); ?>">Logga ut</a></li>
 		</ul>
 		

@@ -36,11 +36,16 @@ class Start extends CI_Controller
 	
 	public function dologin()
 	{
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		if (isset($_POST['rememberme']))
+		$this->load->library('AesCtr');
+
+		$decrypted = $this->aesctr->decrypt($_POST['jCryption'], $_SESSION["key"], 256);
+		parse_str($decrypted, $decrypted_array);
+
+		$username = $decrypted_array['username'];
+		$password = $decrypted_array['password'];
+		if (isset($decrypted_array['rememberme']))
 		{
-			$rememberme = $_POST['rememberme'];
+			$rememberme = $decrypted_array['rememberme'];
 		}
 		else
 		{
@@ -57,8 +62,8 @@ class Start extends CI_Controller
 			}
 			else
 			{
-				setcookie ("svmobile_un", "", time() - 3600);
-				setcookie ("svmobile_pw", "", time() - 3600);
+				setcookie ("svmobile_un");
+				setcookie ("svmobile_pw");
 			}
 			redirect('/menu/', 'refresh');
 			die();
@@ -76,8 +81,8 @@ class Start extends CI_Controller
 	public function logout()
 	{
 		$this->svm->Logout();
-		setcookie ("svmobile1", "", time() - 3600);
-		setcookie ("svmobile2", "", time() - 3600);
+		setcookie ("svmobile1");
+		setcookie ("svmobile2");
 
 		redirect('/start/', 'refresh');
 
